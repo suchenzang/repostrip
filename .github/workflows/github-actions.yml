@@ -16,7 +16,6 @@ jobs:
         run: java -jar bfg-1.14.0.jar --private --no-blob-protection --delete-files "fb_*" .git
       - name: report logs
         run: git log
-      - name: push to dest
+      - name: push to oss branch
         run: |
-          git remote set-url origin git@github.com:m3rlin45/repostrip_destintation.git
-          git push -u origin main
+          git push origin HEAD:oss
