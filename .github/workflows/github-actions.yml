@@ -13,7 +13,7 @@ jobs:
       - name: fetch bfg
         run: curl https://repo1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar -O
       - name: strip repo
-        run: java -jar bfg-1.14.0.jar --private --no-blob-protection --delete-files "fb_*" .git
+        run: java -jar bfg-1.14.0.jar --private --no-blob-protection --delete-files "fb_*" --delete-folders "fb_*" .git
       - name: report logs
         run: git log
       - name: push to oss branch
