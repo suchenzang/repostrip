@@ -1,0 +1,21 @@
+name: Rewrite History And Push
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  rewrite-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: fetch bfg
+        run: curl https://repo1.maven.org/maven2/com/madgag/bfg/1.14.0/bfg-1.14.0.jar -O
+      - name: strip repo
+        run: java -jar bfg-1.14.0.jar --private --no-blob-protection --delete-files "fb_*" --delete-folders "fb_*" .git
+      - name: report logs
+        run: git log
+      - name: push to oss branch
+        run: |
+          git push origin HEAD:oss
